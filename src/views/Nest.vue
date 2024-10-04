@@ -7,20 +7,20 @@
 
     <div class="content">
       <nav class="nav">
-        <router-link to="./page1">
+        <router-link to="/default/nest/1/page1">
           페이지 1
         </router-link>
-        <router-link to="./page2">
+        <router-link to="/default/nest/1/page2">
           페이지 2
         </router-link>
-        <router-link to="../page2/1">
-          페이지 2-1
+        <router-link to="/default/nest/1/page3/1">
+          페이지 3-1
         </router-link>
-        <router-link to="../page2/2">
-          페이지 2-2
+        <router-link to="/default/nest/1/page3/2">
+          페이지 3-2
         </router-link>
-        <router-link to="../page2/3">
-          페이지 2-3
+        <router-link to="/default/nest/1/page3/3">
+          페이지 3-3
         </router-link>
       </nav>
       <keep-alive>

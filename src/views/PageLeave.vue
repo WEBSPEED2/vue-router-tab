@@ -2,7 +2,6 @@
   <div>
     <h2>페이지 떠나기 확인</h2>
 
-    <page-timer />
 
     <p>
       탭이 닫히거나 새로 고쳐지거나 교체될 때 페이지에서 프롬프트를 확인합니다.
@@ -33,11 +32,9 @@
 </template>
 
 <script>
-import PageTimer from '../components/PageTimer.vue'
 
 export default {
   name: 'PageLeave',
-  components: { PageTimer },
 
   /**
    * 页面离开前确认

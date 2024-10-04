@@ -2,13 +2,13 @@ import { importPage } from '../utils'
 import extendRoutes from '../utils/extendRoutes'
 import getPageRoutes from './page'
 
-// PascalCase 转 kebab-case
+// PascalCase를 케밥 케이스로
 const pascal2Kebab = str =>
   str
     .replace(/([a-z])([A-Z])/g, ($, $1, $2) => $1 + '-' + $2.toLowerCase())
     .replace(/^([A-Z])/, ($, $1) => $1.toLowerCase())
 
-// 需要自定义的框架路由
+// 사용자 정의 프레임워크 라우팅이 필요합니다.
 const frameRoutes = {
   Reuse: {
     redirect: 'rule/default/'
@@ -89,10 +89,10 @@ const frameRoutes = {
   }
 }
 
-// 获取目录下框架路由
+// 디렉터리 아래의 프레임 경로를 가져옵니다.
 const context = require.context('../components/frames/', false, /^.*\.vue$/)
 
-// 生成框架路由
+// 프레임 경로 생성
 const routes = context.keys().map(filePath => {
   const frame = filePath.match(/\w+/)[0]
   const path = '/' + pascal2Kebab(frame) + '/'

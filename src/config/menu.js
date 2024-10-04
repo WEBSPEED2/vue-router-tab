@@ -23,7 +23,7 @@ export default [
     text: '캐시 제어',
     children: [
       { text: '탭 규칙', to: '/default/rule' },
-      { text: '탭 캐시 - 비활성화됨', to: '/default/no-cache' },
+      { text: '탭 캐시 비활성화됨', to: '/default/no-cache/1' },
       { text: '최대 캐시 수', to: '/max-alive' },
       { text: '재사용 가능한 구성 요소', to: '/reuse' }
     ]

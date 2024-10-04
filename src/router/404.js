@@ -1,6 +1,6 @@
 import { importPage } from '../utils'
 
-// 404 路由
+// 404 라우팅
 export default {
   path: '404',
   component: importPage('404'),

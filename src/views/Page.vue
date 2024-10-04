@@ -1,9 +1,6 @@
 <template>
-    <!-- Fragments -->
   
     <h2 @click="click">페이지{{ pageId }}</h2>
-
-    <page-timer />
 
     <h3>탭 작업</h3>
 
@@ -53,7 +50,7 @@
       <a class="demo-btn" @click="$tabs.reset()">재설정 탭</a>
     </p>
 
-    <iframe-operate />
+    <!-- <iframe-operate /> -->
 
     <h3>라우팅 정보</h3>
 
@@ -62,13 +59,12 @@
 </template>
 
 <script>
-import PageTimer from '../components/PageTimer.vue'
 import PageRouteInfo from '../components/PageRouteInfo.vue'
 import IframeOperate from './IframeOperate.vue'
 
 export default {
   name: 'Page',
-  components: { PageTimer, PageRouteInfo, IframeOperate },
+  components: { PageRouteInfo, IframeOperate },
   data() {
     let id = this.$route.params.id
     return {

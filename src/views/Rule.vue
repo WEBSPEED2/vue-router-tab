@@ -4,7 +4,6 @@
 
     <p>通过配置路由元信息 <code>meta.key</code> 来设置页签规则</p>
 
-    <page-timer />
 
     <table class="demo-table">
       <thead>
@@ -63,12 +62,11 @@
 </template>
 
 <script>
-import PageTimer from '../components/PageTimer.vue'
 import PageRouteInfo from '../components/PageRouteInfo.vue'
 
 export default {
   name: 'Rule',
-  components: { PageTimer, PageRouteInfo },
+  components: { PageRouteInfo },
   data() {
     let route = this.$route
     let { catalog, type } = route.params

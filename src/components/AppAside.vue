@@ -3,9 +3,6 @@
     <div class="app-sd-menu">
       <menu-item v-for="(item, index) in menu" :key="index" :data="item" />
     </div>
-    <footer class="app-sd-ft">
-      <site-link />
-    </footer>
   </aside>
 </template>
 
@@ -39,16 +36,6 @@ export default {
 
     > .menu-group {
       margin-bottom: 1rem;
-    }
-  }
-
-  &-ft {
-    border-top: 1px solid #eee;
-
-    @include screen-pc {
-      .site-link {
-        display: none;
-      }
     }
   }
 }

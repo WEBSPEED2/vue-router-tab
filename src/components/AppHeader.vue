@@ -5,7 +5,6 @@
       <img class="site-logo" src="@/assets/img/logo.png" alt="Vue Router Tab - logo" />
       <h2 class="site-title"><a href="../">Vue Router Tab</a> - Demo</h2>
     </div>
-
   </header>
 </template>
 

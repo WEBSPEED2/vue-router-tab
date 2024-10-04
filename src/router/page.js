@@ -111,17 +111,19 @@ export default () => [
     children: [
       {
         path: 'page1',
-        component: importPage('Page1')
+        title: route => `페이지 ${route.params.id}`,
+        component: importPage('Page1' )
       },
       {
         path: 'page2',
+        title: route => `페이지 ${route.params.id}`,
         component: importPage('Page2')
       },
       {
-        path: 'page2/:id',
-        component: importPage('Page'),
+        path: 'page3/:id',
+        component: importPage('Page3'),
         meta: {
-          title: route => `페이지2- ${route.params.id}`,
+          title: route => `페이지 3 - ${route.params.id}`,
           icon: 'rt-icon-doc',
           key: 'path'
         }
