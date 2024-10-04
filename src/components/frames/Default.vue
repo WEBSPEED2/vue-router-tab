@@ -1,3 +1,3 @@
 <template>
-  <router-tab />
+  <router-tab :dragsort="true" />
 </template>

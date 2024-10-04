@@ -1,6 +1,6 @@
 @use 'sass:math';
 
-// 变量
+// 변하기 쉬운
 $color-primary: #42b983;
 $border-color: #eaecef;
 $text-color: #4d4d4d;
@@ -16,15 +16,15 @@ $tab-padding: 20px;
 $close-icon-margin: 4px;
 $close-icon-size: 13px;
 
-// 页签
+// 꼬리표
 .router-tab {
-  $slider-width: 15px; // 左右滑动按钮宽度
+  $slider-width: 15px; // 좌우 슬라이딩 버튼 폭
 
   display: flex;
   flex-direction: column;
   min-height: 300px;
 
-  // 页签头部
+  // 탭 헤더
   &__header {
     position: relative;
     z-index: 9;
@@ -36,7 +36,7 @@ $close-icon-size: 13px;
     transition: all 0.2s ease-in-out;
   }
 
-  // 滚动区域
+  // 스크롤 영역
   &__scroll {
     position: relative;
     flex: 1 1 0px;
@@ -48,7 +48,7 @@ $close-icon-size: 13px;
       height: 100%;
       overflow: hidden;
 
-      // 移动设备原生滚动
+      // 모바일 네이티브 스크롤
       &.is-mobile {
         overflow-x: auto;
         overflow-y: hidden;
@@ -56,7 +56,7 @@ $close-icon-size: 13px;
     }
   }
 
-  // 滚动条
+  // 스크롤바
   &__scrollbar {
     $h: 3px;
 
@@ -91,7 +91,7 @@ $close-icon-size: 13px;
     }
   }
 
-  // 页签导航
+  // 탭 탐색
   &__nav {
     position: relative;
     display: inline-flex;
@@ -102,7 +102,7 @@ $close-icon-size: 13px;
     list-style: none;
   }
 
-  // 页签项
+  // 페이지 탭 항목
   &__item {
     position: relative;
     display: flex;
@@ -122,7 +122,7 @@ $close-icon-size: 13px;
       border-left: $border;
     }
 
-    // 激活右键菜单的页签
+    // 마우스 오른쪽 버튼 클릭 메뉴 탭 활성화
     &.is-contextmenu {
       color: #000;
     }
@@ -147,18 +147,18 @@ $close-icon-size: 13px;
       }
     }
 
-    // 激活的页签
+    // 활성화된 탭
     &.is-active {
       border-bottom-color: #fff;
     }
 
-    // 拖拽经过
+    //  드래그하여
     &.is-drag-over {
       background: rgba(0, 0, 0, 0.05);
       transition: background 0.15s ease;
     }
 
-    // 页签标题
+    // 탭 제목
     &-title {
       min-width: 30px;
       max-width: 100px;
@@ -167,13 +167,13 @@ $close-icon-size: 13px;
       text-overflow: ellipsis;
     }
 
-    // 页签图标
+    // 탭 아이콘
     &-icon {
       margin-right: 5px;
       font-size: 16px;
     }
 
-    // 页签关闭按钮
+    // 탭 닫기 버튼
     &-close {
       $inner: 8px;
 
@@ -220,7 +220,7 @@ $close-icon-size: 13px;
     }
   }
 
-  // 页面容器
+  // 페이지 컨테이너
   &__container {
     position: relative;
     flex: 1;
@@ -228,6 +228,7 @@ $close-icon-size: 13px;
     overflow-y: auto;
     background: #fff;
     transition: all 0.4s ease-in-out;
+    padding: 1rem;
 
     > .router-alive {
       height: 100%;
@@ -237,7 +238,7 @@ $close-icon-size: 13px;
     }
   }
 
-  // iframe 页面
+  // 아이프레임 페이지
   &__iframe {
     position: absolute;
     top: 0;
@@ -246,7 +247,7 @@ $close-icon-size: 13px;
     height: 100%;
   }
 
-  // 右键菜单
+  // 마우스 오른쪽 버튼 클릭 메뉴
   &__contextmenu {
     position: fixed;
     z-index: 999;
@@ -281,7 +282,7 @@ $close-icon-size: 13px;
         pointer-events: none;
       }
 
-      // 拥有图标
+      // 아이콘 있음
       .has-icon & {
         padding-left: 30px;
       }
@@ -294,7 +295,7 @@ $close-icon-size: 13px;
       display: none;
       line-height: 30px;
 
-      // 拥有图标
+      // 아이콘 있음
       .has-icon & {
         display: block;
       }

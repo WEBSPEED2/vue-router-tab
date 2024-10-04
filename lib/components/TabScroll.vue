@@ -31,12 +31,12 @@
 <script>
 import { scrollTo, scrollIntoView, getScrollbarWidth } from '../util'
 
-// 滚动条
+// 스크롤바
 export default {
   name: 'TabScroll',
 
   props: {
-    // 每次滚动距离
+    // 매번 스크롤 거리
     space: {
       type: Number,
       default: 300
@@ -45,7 +45,7 @@ export default {
 
   data() {
     return {
-      isMobile: false, // 是否移动端
+      isMobile: false, // 모바일인지
 
       scrollData: {
         clientWidth: 0,
@@ -58,7 +58,7 @@ export default {
   },
 
   computed: {
-    // 是否拥有滚动条
+    // 스크롤바 유무
     hasScroller() {
       return (
         !this.isMobile &&
@@ -67,7 +67,7 @@ export default {
       )
     },
 
-    // 滑块宽度
+    // 슬라이더 폭
     thumbWidth() {
       if (!this.hasScroller) return
 
@@ -75,11 +75,11 @@ export default {
       return (clientWidth / scrollWidth) * clientWidth
     },
 
-    // 滑块 left
+    // 슬라이더 왼쪽
     thumbLeft() {
       if (!this.hasScroller) return
 
-      // 拖拽滚动
+      // 드래그 앤 스크롤
       if (this.dragData) {
         return this.dragData.thumbLeft
       }
@@ -98,7 +98,7 @@ export default {
   },
 
   methods: {
-    // 更新滚动数据
+    // 롤링 데이터 업데이트
     update() {
       const { container } = this.$refs
 
@@ -106,25 +106,25 @@ export default {
 
       const { clientWidth, scrollWidth, scrollLeft } = container
 
-      // 判断是否移动端
-      // userAgent 中包含 mobile 字段，或者浏览器滚动条宽度为 0
+      // 모바일인지 확인
+      // userAgent에 모바일 필드가 포함되어 있거나 브라우저 스크롤 막대 너비가 0입니다.
       this.isMobile =
         /mobile/i.test(navigator.userAgent) || !getScrollbarWidth()
 
       Object.assign(this.scrollData, { clientWidth, scrollWidth, scrollLeft })
     },
 
-    // 滚动到指定位置
+    // 지정된 위치로 스크롤
     scrollTo(left, smooth = true) {
       scrollTo({ wrap: this.$refs.container, left, smooth })
     },
 
-    // 滚动到元素
+    // 요소로 스크롤
     scrollIntoView(el) {
       scrollIntoView({ el, wrap: this.$refs.container, inline: 'center' })
     },
 
-    // 判断子节点是否完全在可视区域
+    // 하위 노드가 가시 영역에 완전히 있는지 확인
     isInView(el) {
       const { container } = this.$refs
       const offsetLeft = el.offsetLeft
@@ -140,7 +140,7 @@ export default {
       return true
     },
 
-    // 页签鼠标滚动
+    // 탭 마우스 스크롤
     onWheel(e) {
       const now = +new Date()
       const enable = now - (this.lastWheel || 0) > 100
@@ -157,7 +157,7 @@ export default {
       )
     },
 
-    // 拖拽
+    // 드래그
     onDragStart(e) {
       const { thumbLeft } = this
 
@@ -185,10 +185,10 @@ export default {
         thumbLeft = maxThumbLeft
       }
 
-      // 更新滑块定位
+      // 슬라이더 위치 업데이트
       dragData.thumbLeft = thumbLeft
 
-      // 滚动
+      // 스크롤
       this.scrollTo(
         (thumbLeft * (scrollWidth - clientWidth)) / (clientWidth - thumbWidth),
         false
@@ -197,7 +197,7 @@ export default {
       e.preventDefault()
     },
 
-    // 拖拽结束
+    // 드래그 끝
     onDragEnd(e) {
       this.dragData = null
 

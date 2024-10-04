@@ -1,17 +1,26 @@
 <template>
   <div>
     <header class="header">
-      嵌套路由{{ $route.params.nestId }}
+      중첩 라우팅{{ $route.params.path }}
       <input type="text" />
     </header>
 
     <div class="content">
       <nav class="nav">
         <router-link to="./page1">
-          页面1
+          페이지 1
         </router-link>
         <router-link to="./page2">
-          页面2
+          페이지 2
+        </router-link>
+        <router-link to="../page2/1">
+          페이지 2-1
+        </router-link>
+        <router-link to="../page2/2">
+          페이지 2-2
+        </router-link>
+        <router-link to="../page2/3">
+          페이지 2-3
         </router-link>
       </nav>
       <keep-alive>

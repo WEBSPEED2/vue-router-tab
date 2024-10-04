@@ -96,6 +96,7 @@ const context = require.context('../components/frames/', false, /^.*\.vue$/)
 const routes = context.keys().map(filePath => {
   const frame = filePath.match(/\w+/)[0]
   const path = '/' + pascal2Kebab(frame) + '/'
+
   const { redirect, children } = frameRoutes[frame] || {}
 
   return {

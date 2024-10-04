@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import frameRoutes from './frames'
 import route404 from './404'
 
-// 全局 404 路由
+// 글로벌 404 라우팅
 const globalRoute404 = {
   ...route404,
   path: '/404'
@@ -17,13 +17,13 @@ const $router = createRouter({
       redirect: '/default/page/1'
     },
   
-    // 框架子路由
+    // 프레임 하위 라우팅
     ...frameRoutes,
   
-    // 根路由 404
+    // 루트 루트 404
     globalRoute404,
   
-    // 未匹配的路由 404
+    // 비교할 수 없는 경로 404
     {
       path: '/:pathMatch(.*)*',
       redirect(to) {
@@ -35,11 +35,11 @@ const $router = createRouter({
             item => item.path === base
           )
   
-          // 子路由 404
+          // 404번 서브루트
           if (matchParent) return base + '404'
         }
   
-        // 根路由 404
+        // 루트 루트 404
         return '/404'
       }
     }

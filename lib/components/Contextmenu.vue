@@ -25,12 +25,12 @@ export default {
   inject: ['$tabs'],
 
   props: {
-    // 右键数据
+    // 데이터를 마우스 오른쪽 버튼으로 클릭하세요.
     data: {
       type: [Boolean, Object]
     },
 
-    // 菜单配置
+    // 메뉴 구성
     menu: {
       type: Array,
       default: () => defaultMenu
@@ -38,20 +38,20 @@ export default {
   },
 
   computed: {
-    // 激活菜单的页签
+    // 메뉴 탭 활성화
     target() {
       return this.tabMap[this.data.id]
     },
 
-    // 菜单选项
+    // 메뉴 옵션
     menuList() {
       return this.menu
         .map(item => {
           if (typeof item === 'string') {
-            // 内置菜单
+            // 내장 메뉴
             return menuMap[item]
           } else if (item && item.id) {
-            // 扩展内置菜单
+            // 내장 메뉴 확장
             let origin = menuMap[item.id]
             return origin ? { ...origin, ...item } : item
           }
@@ -59,12 +59,12 @@ export default {
         .filter(item => item)
     },
 
-    // 是否显示图标
+    // 아이콘 표시 여부
     hasIcon() {
       return this.menuList.some(item => item.icon)
     },
 
-    // 页签 map
+    // 탭 map
     tabMap() {
       return this.$tabs.$refs.tab.reduce((map, item) => {
         map[item.id] = item
@@ -72,22 +72,22 @@ export default {
       }, {})
     },
 
-    // 页签组件列表
+    // 탭 구성 요소 목록
     tabs() {
       return this.$tabs.items.map(item => this.tabMap[item.id])
     },
 
-    // 左侧可关闭的页签
+    // 왼쪽에는 닫을 수 있는 탭이 있습니다.
     lefts() {
       return this.tabs.slice(0, this.data.index).filter(item => item.closable)
     },
 
-    // 左侧可关闭的页签
+    // 오른쪽에는 닫을 수 있는 탭이 있습니다.
     rights() {
       return this.tabs.slice(this.data.index + 1).filter(item => item.closable)
     },
 
-    // 其他可关闭的页签
+    // 기타 닫을 수 있는 탭
     others() {
       return this.tabs.filter(item => item.closable && this.data.id !== item.id)
     }
@@ -98,7 +98,7 @@ export default {
   },
 
   methods: {
-    // 关闭多个页签
+    // 여러 탭 닫기
     async closeMulti(tabs) {
       for (let { id } of tabs) {
         try {
@@ -106,13 +106,13 @@ export default {
         } catch (e) { /* empty */ }
       }
 
-      // 当前页签如已关闭，则打开右键选中页签
+      // 현재 탭이 닫혀 있는 경우 마우스 오른쪽 버튼을 클릭하고 탭을 선택하여 엽니다.
       if (!this.$tabs.activeTab) {
         this.$router.replace(this.target.to)
       }
     },
 
-    // 适应边界位置
+    // 경계 위치에 적응
     adjust() {
       const { clientWidth } = this.$el
       const winWidth = window.innerWidth

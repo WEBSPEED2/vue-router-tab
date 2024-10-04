@@ -6,66 +6,66 @@
 </template>
 
 <script>
-// 引入全屏混入
+// 전체 화면 믹스인 소개
 import fullscreen from '../../mixins/fullscreen'
 
 export default {
   mixins: [fullscreen],
 
   computed: {
-    // 右键菜单
+    // 마우스 오른쪽 버튼 클릭 메뉴
     contextmenu() {
       return [
-        // 使用内置菜单
+        // 내장 메뉴 사용
         'refresh',
 
-        // 扩展内置菜单：添加图标
+        // 내장 메뉴 확장: 아이콘 추가
         {
           id: 'close',
           icon: 'rt-icon-close'
         },
 
-        // 扩展内置菜单：修改执行方法
+        // 내장 메뉴 확장 : 실행 방법 수정
         {
           id: 'closeOthers',
           handler({ $menu }) {
             $menu.closeMulti($menu.others)
-            alert('关闭其他页签')
+            alert('다른 탭 닫기')
           }
         },
 
-        // 自定义菜单
+        // 맞춤 메뉴
         {
           id: 'custom',
-          title: '自定义操作',
-          tips: '这是一个自定义操作',
+          title: '맞춤 메뉴',
+          tips: '이것은 사용자 정의 작업입니다',
           icon: 'rt-icon-doc',
           class: 'custom-action',
-          // 是否显示，不提供则默认显示
+          // 표시 여부. 제공되지 않은 경우 기본적으로 표시됩니다.
           visible(context) {
             return context.$tabs.items.length < 3
           },
 
-          // 是否启用，不提供则默认启用
+          // 활성화 여부. 제공되지 않은 경우 기본적으로 활성화됩니다.
           enable(context) {
             return !(context.data.index % 2)
           },
 
-          // 点击触发
+          // 클릭 트리거
           handler(context) {
             console.log(context)
-            alert('这是自定义操作，请打开控制台查看输出参数')
+            alert('맞춤작업입니다. 콘솔을 확인하세요.')
           }
         },
 
-        // 拥有状态的菜单 - 全屏
+        // 상태가 포함된 메뉴 - 전체 화면
         {
           id: 'fullscreen',
-          title: () => (this.fullscreen ? '退出全屏' : '全屏'),
+          title: () => (this.fullscreen ? '전체 화면 종료' : '전체 화면'),
           icon: () =>
             this.fullscreen ? 'rt-icon-fullscreen-exit' : 'rt-icon-fullscreen',
 
-          // 点击触发
+          // 클릭 트리거
           handler: () =>
             setTimeout(() => {
               this.fullscreen = !this.fullscreen

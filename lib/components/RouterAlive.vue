@@ -29,26 +29,26 @@ import { mapGetters, getTransOpt, getCtorId } from '../util'
 import RouteMatch from '../util/RouteMatch'
 
 /**
- * 路由缓存控件
+ * 경로 캐시 제어
  */
 export default {
   name: 'RouterAlive',
 
   provide() {
-    // 提供实例给子组件调用
+    // 호출할 하위 구성 요소에 대한 인스턴스 제공
     return {
       RouterAlive: this
     }
   },
 
   props: {
-    // 默认是否开启缓存
+    // 기본적으로 캐싱을 활성화할지 여부
     keepAlive: {
       type: Boolean,
       default: false
     },
 
-    // 是否复用路由组件
+    // 라우팅 구성요소 재사용 여부
     reuse: {
       type: Boolean,
       default: false
@@ -60,19 +60,19 @@ export default {
       default: 0
     },
 
-    // 页面 class
+    // 페이지 class
     pageClass: {
       type: [Array, Object, String],
       default: 'router-alive-page'
     },
 
-    // 页面滚动元素选择器
+    // 페이지 스크롤 요소 선택기
     pageScroller: {
       type: String,
       default: ''
     },
 
-    // 过渡效果
+    // 전환 효과
     transition: {
       type: [String, Object]
     },
@@ -85,10 +85,10 @@ export default {
     this.cache = {}
 
     return {
-      // 路由匹配信息
+      // 경로 매칭 정보
       routeMatch: new RouteMatch(this),
 
-      // 是否正在更新
+      // 업데이트 중인가요?
       onRefresh: false,
 
       keepAliveExclude: null,
@@ -97,7 +97,7 @@ export default {
   },
 
   computed: {
-    // 从 this.routeMatch 提取计算属性
+    // this.routeMatch에서 계산된 속성을 추출합니다.
     ...mapGetters('routeMatch', [
       'key',
       'meta',
@@ -108,14 +108,14 @@ export default {
       'alivePath'
     ]),
 
-    // 页面过渡
+    // 페이지 전환
     pageTrans() {
       return getTransOpt(this.transition)
     }
   },
 
   watch: {
-    // 监听路由
+    // 청취 경로
     $route: {
       handler($route, old) {
         // 구성 요소 준비
@@ -137,7 +137,7 @@ export default {
           this.refresh(key)
         }
 
-        // 嵌套路由，地址跟缓存不一致
+        // 중첩된 라우팅, 주소가 캐시와 일치하지 않습니다.
         if (nest && cacheVM && $route.fullPath !== cacheFullPath) {
           const oldKey = this.matchRoute(old).key
           if (oldKey !== key) {
@@ -145,12 +145,12 @@ export default {
           }
         }
 
-        // 类型：更新或者新建缓存
+        // 유형: 새 캐시 업데이트 또는 생성
         const type = cacheAlivePath ? 'update' : 'create'
 
         this.$emit('change', type, this.routeMatch)
 
-        // 更新缓存路径
+        // 캐시 경로 업데이트
         if (alive) {
           cacheItem.fullPath = $route.fullPath
         }
@@ -160,7 +160,7 @@ export default {
     }
   },
 
-  // 销毁后清理
+  // 파괴 후 정리
   unmounted() {
     this.cache = null
     this.routeMatch = null
@@ -168,7 +168,7 @@ export default {
   },
 
   methods: {
-    // 移除缓存
+    // 캐시 제거
     async remove(key = this.key) {
       const $alive = this.$refs.alive
 
@@ -193,30 +193,30 @@ export default {
       }
     },
 
-    // 刷新
+    // 새로 고치다
     refresh(key = this.key) {
       this.remove(key)
 
-      // 非当前缓存，直接移除
+      // 현재가 아닌 캐시, 직접 제거
       if (key === this.key) {
         this.reload()
       }
     },
 
-    // 重新加载
+    // 다시 로드
     reload() {
       if (this.onRefresh) return
 
       this.onRefresh = true
     },
 
-    // 缓存页面组件钩子
+    // 캐시 페이지 구성 요소 후크
     pageHook(hook) {
       const handler = this[`pageHook:${hook}`]
       if (typeof handler === 'function') handler()
     },
 
-    // 页面创建
+    // 페이지 생성
     pageHookCreated() {
       // console.log('pageHookCreated')
       this.cache[this.key] = {
@@ -225,13 +225,13 @@ export default {
       }
     },
 
-    // 页面挂载
+    // 페이지 마운트
     pageHookMounted(target) {
       // console.log('pageHookMounted')
       if (this.cache[this.key]) {
         this.cache[this.key].vm = target
 
-        // 重置初始滚动位置
+        // 초기 스크롤 위치 재설정
         this.resetScrollPosition()
       } else {
         this.cache[this.key] = {
@@ -242,41 +242,41 @@ export default {
       }
     },
 
-    // 页面激活
+    // 페이지 활성화
     pageHookActivated(target) {
       // console.log('pageHookActivated')
       const pageVm = this.$refs.page
 
-      // 热重载更新
+      // 핫 리로드 업데이트
       if (this.checkHotReloading(target, 'activated')) return
 
-      // 嵌套路由缓存导致页面不匹配时强制更新
+      // 페이지가 일치하지 않으면 중첩된 경로 캐시로 인해 강제 업데이트가 발생함
       if (this.nestForceUpdate) {
         delete this.nestForceUpdate
         pageVm.$forceUpdate()
       }
 
-      // 还原滚动位置
+      // 스크롤 위치 복원
       this.restoreScrollPosition(target)
     },
 
-    // 页面失活
+    // 페이지 비활성화
     pageHookDeactivated(target) {
       // console.log('pageHookDeactivated')
       if (this.checkHotReloading(target, 'deactivated')) return
 
-      // 保存滚动位置
+      // 스크롤 위치 저장
       this.saveScrollPosition(target)
     },
 
-    // 页面销毁后清理 cache
+    // 페이지 파괴 후 캐시 정리
     async pageHookUnmounted() {
       // console.log('pageHookUnmounted')
       await this.$nextTick()
 
       if (!this.cache) return
 
-      // 清理已销毁页面的缓存信息
+      // 파괴된 페이지의 캐시 정보 지우기
       Object.entries(this.cache).forEach(([key, item]) => {
         const { vm } = item || {}
         if (vm && vm._isDestroyed) {
@@ -290,11 +290,11 @@ export default {
       }
     },
     
-    // 匹配路由信息
+    // 라우팅 정보 일치
     matchRoute($route) {
       const matched = this._match
 
-      // 当前路由
+      // 현재 경로
       if (
         $route === this.$route ||
         $route.fullPath === this.$route.fullPath ||
@@ -316,7 +316,7 @@ export default {
       const lastCid = target._lastCtorId
       const cid = (target._lastCtorId = getCtorId(target))
 
-      // 热重载更新
+      // 핫 리로드 업데이트
       if (lastCid && lastCid !== cid) {
         this.refresh()
         return true
@@ -325,7 +325,7 @@ export default {
       return false
     },
 
-    // 获取滚动元素
+    // 스크롤 요소 가져오기
     getScroller(selector) {
       return selector.startsWith('$')
         ? document.querySelector(selector.replace(/^\$/, ''))

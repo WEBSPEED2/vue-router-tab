@@ -6,16 +6,12 @@
       <h2 class="site-title"><a href="../">Vue Router Tab</a> - Demo</h2>
     </div>
 
-    <site-link />
   </header>
 </template>
 
 <script>
-import SiteLink from './SiteLink.vue'
-
 export default {
-  name: 'AppHeader',
-  components: { SiteLink }
+  name: 'AppHeader'
 }
 </script>
 
@@ -74,16 +70,5 @@ export default {
     }
   }
 
-  .site-link {
-    margin-right: 1em;
-
-    @include screen-mob {
-      display: none;
-    }
-
-    :deep(a) {
-      margin: 0 0.3em;
-    }
-  }
 }
 </style>

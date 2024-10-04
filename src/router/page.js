@@ -1,12 +1,12 @@
 import { importPage } from '../utils'
 
-// 页面路由
+// 페이지 라우팅
 export default () => [
   {
     path: 'page/:id',
     component: importPage('Page'),
     meta: {
-      title: route => `페이지${route.params.id}`,
+      title: route => `페이지 ${route.params.id}`,
       icon: 'rt-icon-doc',
       key: 'path'
     }
@@ -116,7 +116,16 @@ export default () => [
       {
         path: 'page2',
         component: importPage('Page2')
-      }
+      },
+      {
+        path: 'page2/:id',
+        component: importPage('Page'),
+        meta: {
+          title: route => `페이지2- ${route.params.id}`,
+          icon: 'rt-icon-doc',
+          key: 'path'
+        }
+      },
     ]
   }
 ]

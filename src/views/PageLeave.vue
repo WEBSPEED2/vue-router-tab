@@ -1,32 +1,32 @@
 <template>
   <div>
-    <h2>页面离开确认</h2>
+    <h2>페이지 떠나기 확인</h2>
 
     <page-timer />
 
     <p>
-      页面在页签关闭/刷新/被替换时将会确认提示
+      탭이 닫히거나 새로 고쳐지거나 교체될 때 페이지에서 프롬프트를 확인합니다.
     </p>
 
     <p>
       <a class="demo-btn" @click="$tabs.refresh(null, true, false)">
-        刷新页签
+        새로고침 탭 
       </a>
 
       <a class="demo-btn" @click="$tabs.close({ force: false })">
-        关闭页签
+        탭 닫기
       </a>
 
       <router-link class="demo-btn" :to="`?id=${+($route.query.id || 0) + 1}`">
-        替换页签
+        탭 바꾸기
       </router-link>
 
       <router-link class="demo-btn" to="/default/page/1">
-        离开路由
+        결로이탈
       </router-link>
 
       <a class="demo-btn" @click="reload">
-        刷新浏览器
+        브라우즈 새로고침
       </a>
     </p>
   </div>

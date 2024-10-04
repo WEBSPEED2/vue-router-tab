@@ -11,13 +11,12 @@
 
 <script>
 import MenuItem from './MenuItem.vue'
-import SiteLink from './SiteLink.vue'
 
 import menu from '../config/menu'
 
 export default {
   name: 'AppAside',
-  components: { MenuItem, SiteLink },
+  components: { MenuItem },
   data() {
     return { menu }
   }
