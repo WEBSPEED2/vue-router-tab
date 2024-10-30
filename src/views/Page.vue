@@ -2,6 +2,7 @@
   
     <h2 @click="click">페이지{{ pageId }}</h2>
 
+    <input>
     <h3>탭 작업</h3>
 
     <p>
